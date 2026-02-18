@@ -1,0 +1,150 @@
+New Date and Time :
+-------------------
+LocalDate :
+-----------
+It is a predefined final class which represents only Date. The java.util.Date class is providing Date and Time both so, only to get the Date we need to use LocalDate class available in java.time package.
+
+         LocalDate d = LocalDate.now();
+
+Here now is a static method of LocalDate class and its return type is LocalDate class. (static Factory Method)
+
+LocalTime :
+-----------
+It is also a final class which will provide only time.
+            LocalTime d = LocalTime.now();
+
+Here now is a static Factory method of LocalTime class and its return type is LocalTime (static Factory Method).
+
+LocalDateTime :
+----------------
+It is also a final class which will provide Date and Time both without a time zone. It is a combination of LocalDate and LocalTime class.
+             LocalDateTime d = LocalDateTime.now();
+
+
+package com.ravi.new_date_time;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public class Demo1 
+{
+	public static void main(String[] args) 
+	{	
+	   LocalDate d = LocalDate.now();
+	   System.out.println(d);
+	   
+	   LocalTime t = LocalTime.now();
+	   System.out.println(t);
+	   
+	    LocalDateTime dt = LocalDateTime.now();
+	    System.out.println(dt);
+	      	    
+	    
+	}
+}
+-------------------------------------------------------------------
+ZonedDateTime : (Date and time + Time zone)
+---------------
+It is a final class available in java.time package.
+
+It is also provides date and time along with time zone so, by using this class we can work with different time zone in a global way.
+
+ZonedDateTime x = ZonedDateTime.now();
+ZoneId zone = x.getZone();
+
+getZone() is a predefined non static method of ZonedDateTime class which returns ZoneId class which is abstract and sealed class, this ZoneId class provides the different zones, by using getAvailableZoneIds() static method we can find out the total zone available using this ZoneId class.
+
+package com.ravi.new_date_time;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public class Demo2 
+{
+	public static void main(String[] args) 
+	{
+		ZonedDateTime z = ZonedDateTime.now();
+		System.out.println(z);
+		
+	    ZoneId zone = z.getZone();
+	    System.out.println(zone);
+	    
+	    System.out.println(ZoneId.getAvailableZoneIds());    
+	   
+	    
+	}
+
+}
+-------------------------------------------------------------------
+Different of() static methods :
+------------------------------
+List.of();
+Set.of();
+Map.of();
+Stream.of();
+Optional.of();
+ZoneId.of();
+--------------------------------------------------------------
+package com.ravi.new_date_time;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public class Demo3 
+{
+    public static void main(String[] args)
+    {
+        ZoneId ausTimeZone = ZoneId.of("Australia/Sydney");
+        ZonedDateTime aus = ZonedDateTime.now(ausTimeZone);        
+        System.out.println("Current Date and Time in Australia Time Zone: " + aus);
+        
+              
+        
+        ZoneId canadaTimeZone = ZoneId.of("Canada/Atlantic");
+        ZonedDateTime canada = ZonedDateTime.now(canadaTimeZone);        
+        System.out.println("Current Date and Time in Canada Time Zone: " + canada);
+        
+        
+    }
+}
+
+Note : The abstract class ZoneId provides a static method of() which accept String ZoneId as a parameter and returns ZoneId class.
+------------------------------------------------------------------
+DateTimeFormatter :  
+-------------------
+It is a predefined final class available in java.time.format sub package.
+
+It is mainly used to formatting and parsing date and time objects according to Java Date and Time API.
+
+Method :
+--------
+public static DateTimeFormatter ofPattern(String pattern) :
+
+It is a static method of DateTimeFormatter class, It creates a 
+formatter using user specified String pattern ("dd-MM-yyyy HH:mm:ss")
+and LocalDateTime class contains format method which takes 
+DateTimeFormatter as a parameter and returns the String value.
+
+
+package com.ravi.new_date_time;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public  class Demo4 
+{	
+  public static void main(String[] args) 
+  {
+	LocalDateTime now = LocalDateTime.now();
+	System.out.println(now);
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+	
+	String formattedDateTime = now.format(formatter);
+	System.out.println("Formatted DateTime: " + formattedDateTime);
+  }
+}
+-------------------------------------------------------------------
